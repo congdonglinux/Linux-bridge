@@ -165,13 +165,20 @@ Gán bond interface vào bridge:
 
 Để lưu lại cấu hình này, cần khai báo trong file `/etc/network/interfaces`
 
+    auto eth0
+    iface eth0 inet manual
+    bond-master bond0
+
+    auto eth1
+    iface eth1 inet manual
+    bond-master bond0
+
     auto bond0
     iface bond0 inet manual
-      slaves eth1 eth2
-      bond-mode active-backup
+      bond-slaves none
+      bond-mode 802.3ad
       bond-miimon 100
-      bond-downdelay 200
-      bond-updelay 200
+      bond-lacp-rate 1
 
     auto bridgename
     iface bridgename inet static
